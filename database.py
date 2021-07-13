@@ -35,7 +35,7 @@ def read_contacts(filename: str, database) -> None:
         name, email, phone = sheet.row_values(row)  # assigns variables for the row contents
         # print(name, email, phone)  # for debugging
 
-        # If no email or phone, skip the contact
+        # If no email and phone, skip the contact
         if email == '' and phone == '':
             continue
         elif phone == '':
@@ -60,18 +60,21 @@ def add_contact(database, name: str, email: str, phone: int) -> None:
     :param email: The contact email
     :param phone: The contact phone number
     """
+    # Searches the database for the the current contact (excel row)
     cursor = database.execute("SELECT DISTINCT name, email, phone FROM contacts "
                               "WHERE name = ? AND email =? OR phone = ?", (name, email, phone))
-
+    # Assigns the cursur results to the 'row' variable
     row = cursor.fetchone()
-    print(row)  # For debugging
+    # print(row)  # For debugging
 
     # This checks if the contact already exists in the database or not
     if row:
         print("\n{}, {}, {} is already in the database.".format(name, email, phone))
+        # Add the contact to the 'duplicates' table to retain the info in case of any
+        # discrepancies in the final database.
         database.execute("INSERT INTO duplicates VALUES (?, ?, ?)", (name, email, phone))
     else:
-        cursor.execute("INSERT INTO contacts VALUES (?, ?, ?)", (name, email, phone))
+        cursor.execute("INSERT INTO contacts VALUES (?, ?, ?)", (name, email, phone))  # Add contact to db
         cursor.connection.commit()
         # print("{}, {}, {} added to database.".format(name, email, phone))     # For debugging
 
