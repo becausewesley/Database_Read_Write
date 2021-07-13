@@ -63,7 +63,7 @@ def add_contact(database, name: str, email: str, phone: int) -> None:
     # Searches the database for the the current contact (excel row)
     cursor = database.execute("SELECT DISTINCT name, email, phone FROM contacts "
                               "WHERE name = ? AND email =? OR phone = ?", (name, email, phone))
-    # Assigns the cursur results to the 'row' variable
+    # Assigns the cursor results to the 'row' variable
     row = cursor.fetchone()
     # print(row)  # For debugging
 
