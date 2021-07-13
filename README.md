@@ -22,7 +22,7 @@ database, but this will require some changes to the names of the tables and colu
   <br />
   
 
-###Third party libraries:
+### Third party libraries:
 This program uses the _[xlrd](https://xlrd.readthedocs.io/en/latest/)_ library.
 <br />
 Install using:
