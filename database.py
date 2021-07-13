@@ -3,8 +3,8 @@ import xlrd
 
 
 def main():
-    database_file_path = ''
-    excel_file_path = ''
+    database_file_path = 'Your/file/path/here'
+    excel_file_path = 'Your/file/path/here'
 
     db = sqlite3.connect(database_file_path)
     db.execute("CREATE TABLE IF NOT EXISTS contacts (name TEXT, email TEXT, phone INTEGER)")
